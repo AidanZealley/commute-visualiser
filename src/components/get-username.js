@@ -1,5 +1,4 @@
 import React, { component } from 'react';
-console.log('arse')
 
 class GetUsername extends React.Component {
   constructor() {
@@ -10,7 +9,7 @@ class GetUsername extends React.Component {
   };
 
   componentDidMount() {
-    fetch('https://www.strava.com/api/v3/athlete?access_token=88cc0e65d44b0e6d3776be282a2c7bc361d059c7')
+    fetch('https://www.strava.com/api/v3/athlete?access_token=ed9c36dc20bebb93d16ceb89e1fdedf87b30ef0d')
     .then(response => {return response.json()}
     ).then(data => 
       this.setState({username: data.username})

@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import GetUsername from "./components/get-username"
+import Profile from "./components/profile/profile"
 
 const App = () => {
     return (
-        <GetUsername/>
+        <Profile/>
     )
 };
 

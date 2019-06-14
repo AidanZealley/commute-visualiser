@@ -1,13 +1,21 @@
 import React, {Component} from "react";
+import LineChart from "../charts/line-chart";
 
-class GetUserDetails extends Component {
+class MorningCommute extends Component {
+
   constructor() {
     super();
     this.state = {
-      avatar: "",
-      username: "",
-      firstname: "",
-      lastname: ""
+      data: [
+        {a: 1, b: 3},
+        {a: 2, b: 6},
+        {a: 3, b: 2},
+        {a: 4, b: 12},
+        {a: 5, b: 8}
+      ],
+      width: 700,
+      height: 500,
+      margin: 20
     }
   };
 
@@ -24,18 +32,16 @@ class GetUserDetails extends Component {
     )
     .catch(error => this.setState({ error }));
   }
-  
-  render() {
-    const { avatar, username, firstname, lastname, followers } = this.state;
 
+  render() {
     return (
       <div>
-        <img src={avatar}/>
-        <h1>{username}</h1>
-        <h2>{firstname} {lastname}</h2>
+        <h3>Morning Commute Times</h3>
+        <LineChart data={this.state.data} width={this.state.width} height={this.state.height} margin={this.state.margin} />
       </div>
     );
   }
+
 }
 
-export default GetUserDetails
+export default MorningCommute

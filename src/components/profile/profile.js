@@ -1,8 +1,9 @@
-import React, { component } from 'react';
+import React, {Component} from "react";
 import GetUserDetails from "./get-user-details";
 import GetUserStats from "./get-user-stats";
 
-class Profile extends React.Component {  
+class Profile extends Component {
+
   render() {
     return (
         <div>
@@ -11,6 +12,7 @@ class Profile extends React.Component {
         </div>
     )
   }
+
 }
 
 export default Profile

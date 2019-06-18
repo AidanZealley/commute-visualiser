@@ -6,30 +6,53 @@ class MorningCommute extends Component {
   constructor() {
     super();
     this.state = {
-      data: [
-        {a: 1, b: 3},
-        {a: 2, b: 6},
-        {a: 3, b: 2},
-        {a: 4, b: 12},
-        {a: 5, b: 8}
-      ],
+      rides: [],
       width: 700,
       height: 500,
-      margin: 20
+      margin: 20,
+      allRides: 0
     }
   };
 
+
   componentDidMount() {
-    fetch('https://www.strava.com/api/v3/athlete?access_token=ed9c36dc20bebb93d16ceb89e1fdedf87b30ef0d')
-    .then(response => {return response.json()}
-    ).then(data => 
-      this.setState({
-        avatar: data.profile,
-        username: data.username,
-        firstname: data.firstname,
-        lastname: data.lastname
-      })
-    )
+    let pages = 0;
+
+    fetch('https://www.strava.com/api/v3/athletes/35130920/stats?access_token=1ec0c6a50152e76480d19465ca79207786db5d26')
+    .then(response => {return response.json()})
+    .then(data => {
+      pages = Math.ceil(data.all_ride_totals.count / 200);
+    })
+    .then(function() {
+      for (var i = 0; i < pages; i++) {
+        fetch('https://www.strava.com/api/v3/athlete/activities?access_token=745418445eb7a3526afe38eee2cc4ddb6567ef2c&before=1556300800&after=1546300800&page=' + i+1 + '&per_page=200')
+        .then(response => {return response.json()})
+        .then(data => {
+          let matchingRides = [];
+  
+          data.map((ride, index) => {
+            if (ride.name == "Morning Ride" && ride.commute == true) {
+              let matchingRide = {};
+  
+              matchingRide.a = index;
+              matchingRide.b = ride.moving_time;
+  
+              matchingRides.push(matchingRide);
+            }
+          })
+  
+          this.setState({
+            rides: [
+              ...this.state.rides,
+              matchingRides 
+            ]
+          })
+  
+        })
+  
+        .catch(error => this.setState({ error }));
+      }
+    })
     .catch(error => this.setState({ error }));
   }
 
@@ -37,7 +60,7 @@ class MorningCommute extends Component {
     return (
       <div>
         <h3>Morning Commute Times</h3>
-        <LineChart data={this.state.data} width={this.state.width} height={this.state.height} margin={this.state.margin} />
+        <LineChart key="1" data={this.state.rides} width={this.state.width} height={this.state.height} margin={this.state.margin} />
       </div>
     );
   }

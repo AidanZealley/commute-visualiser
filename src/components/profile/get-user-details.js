@@ -12,7 +12,7 @@ class GetUserDetails extends Component {
   };
 
   componentDidMount() {
-    fetch('https://www.strava.com/api/v3/athlete?access_token=ed9c36dc20bebb93d16ceb89e1fdedf87b30ef0d')
+    fetch('https://www.strava.com/api/v3/athlete?access_token=1ec0c6a50152e76480d19465ca79207786db5d26')
     .then(response => {return response.json()}
     ).then(data => 
       this.setState({

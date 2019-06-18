@@ -20,7 +20,7 @@ class AfternoonCommute extends Component {
   };
 
   componentDidMount() {
-    fetch('https://www.strava.com/api/v3/athlete?access_token=ed9c36dc20bebb93d16ceb89e1fdedf87b30ef0d')
+    fetch('https://www.strava.com/api/v3/athlete?access_token=30043e72cc57b3341fcb655f470efad9a4440f21')
     .then(response => {return response.json()}
     ).then(data => 
       this.setState({
@@ -37,7 +37,7 @@ class AfternoonCommute extends Component {
     return (
       <div>
         <h3>Afternoon Commute Times</h3>
-        <LineChart data={this.state.data} width={this.state.width} height={this.state.height} margin={this.state.margin} />
+        <LineChart key="2" data={this.state.data} width={this.state.width} height={this.state.height} margin={this.state.margin} />
       </div>
     );
   }

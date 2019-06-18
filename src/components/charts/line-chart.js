@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import "./line-chart.css";
 
 class LineChart extends Component {
+
     render() {
       
       const {data, width, height, margin} = this.props
